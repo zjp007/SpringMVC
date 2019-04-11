@@ -1,0 +1,7 @@
+dorm\user\service\impl\UserServiceImpl.class
+dorm\user\service\UserService.class
+dorm\user\controller\UserController.class
+dorm\user\domain\pojo\UserEnum.class
+dorm\user\controller\impl\UserControllerImpl.class
+dorm\user\domain\pojo\UserBaseOrder.class
+dorm\user\domain\mapper\UserMapper.class

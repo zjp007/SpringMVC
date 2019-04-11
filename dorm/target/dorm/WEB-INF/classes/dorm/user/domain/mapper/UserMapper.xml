@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dorm.user.domain.mapper.UserMapper">
+	<!-- 返回类型==不包含备用字段 -->
+	<resultMap id="ResultMap" type="dorm.user.domain.pojo.UserBaseOrder" >
+    <id column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="operate" property="operate" jdbcType="INTEGER" />
+  </resultMap>
+  <!-- 返回类型==包含备用字段 -->
+	<resultMap id="ResultALLMap" type="dorm.user.domain.pojo.UserBaseOrder" >
+    <id column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="operate" property="operate" jdbcType="INTEGER" />
+    <result column="spare01" property="spare01" jdbcType="VARCHAR" />
+    <result column="spare02" property="spare02" jdbcType="VARCHAR" />
+    <result column="spare03" property="spare03" jdbcType="VARCHAR" />
+    <result column="spare04" property="spare04" jdbcType="VARCHAR" />
+  </resultMap>
+  <!-- 传入类型==不包含备用字段 -->
+  <parameterMap id="ParameMap" type="dorm.user.domain.pojo.UserBaseOrder">
+  	<parameter property="id" jdbcType="VARCHAR" />
+  	<parameter property="userId" jdbcType="VARCHAR" />
+  	<parameter property="name" jdbcType="VARCHAR" />
+  	<parameter property="password" jdbcType="VARCHAR" />
+  	<parameter property="operate" jdbcType="INTEGER" />
+  </parameterMap>
+  <!-- 传入类型==包含备用字段 -->
+  <parameterMap id="ParameALLMap" type="dorm.user.domain.pojo.UserBaseOrder">
+  	<parameter property="id" jdbcType="VARCHAR" />
+  	<parameter property="userId" jdbcType="VARCHAR" />
+  	<parameter property="name" jdbcType="VARCHAR" />
+  	<parameter property="password" jdbcType="VARCHAR" />
+  	<parameter property="operate" jdbcType="INTEGER" />
+  	<parameter property="spare01" jdbcType="VARCHAR" />
+  	<parameter property="spare02" jdbcType="VARCHAR" />
+  	<parameter property="spare03" jdbcType="VARCHAR" />
+  	<parameter property="spare04" jdbcType="VARCHAR" />
+  </parameterMap>
+  <!-- 基础类型数据 -->
+  <sql id="BaseList" >
+    id, user_id, name, password, operate
+  </sql>
+  <!-- 基础类型数据 -->
+  <sql id="AllList" >
+    id, user_id, name, password, operate, spare01, spare02, spare03, spare04
+  </sql>
+  
+  <select id="selectUser" resultMap="ResultALLMap" parameterType="java.lang.String">
+  	select
+  	<include refid="AllList" />
+  	from user
+  	where user_id = #{userId,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectAllUser" resultMap="ResultALLMap">
+  	select
+  	<include refid="AllList" />
+  	from user
+  </select>
+  
+  <update id="updateUser" parameterType="dorm.user.domain.pojo.UserBaseOrder">
+  	update user
+  	<set>
+  		<if test="id != null and id != ''">
+  			id = #{id,jdbcType=VARCHAR},
+  		</if>
+  		<if test="name != null and name != ''">
+  			name = #{name,jdbcType=VARCHAR},
+  		</if>
+  		<if test="password != null and password != ''">
+  			password = #{password,jdbcType=VARCHAR},
+  		</if>
+  		<if test="operate != null and operate != ''">
+  			operate = #{operate,jdbcType=INTEGER},
+  		</if>
+  		<if test="spare01 != null and spare01 != ''">
+        	#{spare01,jdbcType=VARCHAR},
+        </if>
+        <if test="spare02 != null and spare02 != ''">
+        	#{spare02,jdbcType=VARCHAR},
+        </if>
+        <if test="spare03 != null and spare03 != ''">
+        	#{spare03,jdbcType=VARCHAR},
+        </if>
+        <if test="spare04 != null and spare04 != ''">
+        	#{spare04,jdbcType=VARCHAR},
+        </if>
+  	</set>
+  	where user_id = #{userId}
+  </update>
+  
+  <delete id="deleteUser" parameterType="java.lang.String">
+  	delete from user
+  	where user_id = #{userId,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="insertUser" parameterType="dorm.user.domain.pojo.UserBaseOrder">
+  	insert into user
+  	<trim prefix="(" suffix=")" suffixOverrides=",">
+  		<include refid="AllList" />
+  	</trim>
+  	<trim prefix="values (" suffix=")" suffixOverrides="," >
+  		<if test="id != null and id != ''" >
+  			#{id,jdbcType=VARCHAR},
+        </if>
+        #{userId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}
+        ,#{password,jdbcType=VARCHAR}, #{operate,jdbcType=INTEGER}
+        ,#{spare01,jdbcType=VARCHAR}, #{spare02,jdbcType=VARCHAR}
+        ,#{spare03,jdbcType=VARCHAR},#{spare04,jdbcType=VARCHAR}
+  	</trim>
+  </insert>
+  
+  <select id="selectUserByUserIdOrName" resultMap="ResultALLMap" parameterType="java.lang.String">
+  	select
+  	<include refid="AllList" />
+  	from user
+  	where user_id like CONCAT('%',#{selectStr},'%') OR name like CONCAT('%',#{selectStr},'%')
+  </select>
+  
+  <select id="loginUser" resultMap="ResultALLMap" parameterType="java.lang.String">
+  	select
+  	<include refid="AllList" />
+  	from user
+  	where user_id = #{userId} AND password = #{password} AND operate IS NOT null
+  </select>
+  
+</mapper>

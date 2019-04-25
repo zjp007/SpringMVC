@@ -1,5 +1,6 @@
 # Spring
 Just simple Spring demos
 MYSQL
-Myeclipse
+eclipse
 jdk1.7
+Tomcat 7

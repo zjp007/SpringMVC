@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dorm.student.domain.mapper.StudentMapper">
+<!-- 返回类型==不包含备用字段 -->
+	<resultMap id="ResultMap" type="dorm.student.domain.pojo.StudentBaseOrder" >
+    <id column="student_id" property="studentId" jdbcType="VARCHAR" />
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="room_id" property="roomId" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="mail" property="mail" jdbcType="VARCHAR" />
+    <result column="academy" property="academy" jdbcType="VARCHAR" />
+    <result column="school" property="school" jdbcType="VARCHAR" />
+    <result column="del_mark" property="delMark" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="BaseList">
+  	id, student_id, room_id, name, sex, tel, mail, academy, school, del_mark, status
+  </sql>
+  
+  <select id="selectAllStudentd" resultMap="ResultMap">
+  	select *
+  	from student
+  </select>
+  
+  <select id="selectStudentsWithSearch" resultMap="ResultMap">
+  	select *
+  	from student
+  	<if test="delMark != null and delMark != ''">
+  		where del_mark = #{delMark,jdbcType=INTEGER}
+  	</if>
+  	<if test="delMark == null or delMark == ''">
+  		where del_mark = 0
+  	</if>
+  	<if test="studentId != null and studentId != ''">
+  		AND student_id like CONCAT('%',#{studentId,jdbcType=VARCHAR},'%')
+  	</if>
+  	<if test="roomId != null and roomId != ''">
+  		AND room_id like CONCAT('%',#{roomId,jdbcType=VARCHAR},'%')
+  	</if>
+  	<if test="name != null and name != ''">
+  		AND name like CONCAT('%',#{name,jdbcType=VARCHAR},'%')
+  	</if>
+  	<if test="academy != null and academy != ''">
+  		AND academy like CONCAT('%',#{academy,jdbcType=VARCHAR},'%')
+  	</if>
+  	<if test="school != null and school != ''">
+  		AND school like CONCAT('%',#{school,jdbcType=VARCHAR},'%')
+  	</if>
+  	<if test="status != null and status != ''">
+  		AND status = #{status,jdbcType=INTEGER}
+  	</if>
+  </select>
+  
+  <insert id="insertStudent" parameterType="dorm.student.domain.pojo.StudentBaseOrder">
+  	insert into student
+  	<trim prefix="(" suffix=")" suffixOverrides=",">
+  		<include refid="BaseList" />
+  	</trim>
+  	<trim prefix="values (" suffix=")" suffixOverrides="," >
+  		<if test="id != null and id != ''" >
+  			#{id,jdbcType=VARCHAR},
+        </if>
+        #{studentId,jdbcType=VARCHAR}, #{"roomId",jdbcType=VARCHAR}
+        ,#{name,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}
+        ,#{tel,jdbcType=VARCHAR}, #{mail,jdbcType=VARCHAR}
+        ,#{academy,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}
+        ,#{delMark,jdbcType=INTEGER},#{status,jdbcType=INTEGER}
+  	</trim>
+  </insert>
+  
+  <update id="updateStudent" parameterType="dorm.student.domain.pojo.StudentBaseOrder">
+  	update student
+  	<set>
+  		<if test="id != null and id != ''">
+  			id = #{id,jdbcType=VARCHAR},
+  		</if>
+  		<if test="studentId != null and studentId != ''">
+  			student_id = #{studentId,jdbcType=VARCHAR},
+  		</if>
+  		<if test="roomId != null and roomId != ''">
+  			room_id = #{roomId,jdbcType=VARCHAR},
+  		</if>
+  		<if test="name != null and name != ''">
+  			name = #{name,jdbcType=VARCHAR},
+  		</if>
+  		<if test="sex != null and sex != ''">
+  			sex = #{sex,jdbcType=INTEGER},
+  		</if>
+  		<if test="tel != null and tel != ''">
+  			tel = #{tel,jdbcType=VARCHAR},
+  		</if>
+  		<if test="mail != null and mail != ''">
+  			mail = #{mail,jdbcType=VARCHAR},
+  		</if>
+  		<if test="academy != null and academy != ''">
+  			academy = #{academy,jdbcType=VARCHAR},
+  		</if>
+  		<if test="school != null and school != ''">
+  			school = #{school,jdbcType=VARCHAR},
+  		</if>
+  		<if test="delMark != null and delMark != ''">
+  			del_mark = #{delMark,jdbcType=INTEGER},
+  		</if>
+  		<if test="status != null and status != ''">
+  			status = #{status,jdbcType=INTEGER}
+  		</if>
+  	</set>
+  	where student_id = #{studentId,jdbcType=VARCHAR}
+  </update>
+  
+  <delete id="deleteStudent" parameterType="java.lang.String">
+  	delete *
+  	from student
+  	where student_id = #{studentId,jdbcType=VARCHAR}
+  </delete>
+  
+</mapper>

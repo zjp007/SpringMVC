@@ -167,6 +167,12 @@
             <version>1.9</version>
         </dependency>
         
+        <dependency>
+        	<groupId>com.github.pagehelper</groupId>
+        	<artifactId>pagehelper</artifactId>
+        	<version>4.1.4</version>
+        </dependency>
+        
   </dependencies>
   <build>
     <finalName>dorm</finalName>
@@ -186,6 +192,24 @@
                 <include>**/*.properties</include>
             </includes>
         </resource>
+        <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <excludes>
+                    <exclude>**/*.woff</exclude>
+                    <exclude>**/*.woff2</exclude>
+                    <exclude>**/*.ttf</exclude>
+                 </excludes>
+            </resource>
+            <resource>
+            <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+                <includes>
+                    <include>**/*.woff</include>
+                    <include>**/*.woff2</include>
+                    <include>**/*.ttf</include>
+                </includes>
+            </resource>
     </resources>
     
     <plugins>
@@ -196,6 +220,12 @@
     		<configuration>
     			<source>1.7</source>
     			<target>1.7</target>
+    			<webResources>
+    				<resource>
+    					<directory>src/main/webapp</directory>
+    					<filtering>false</filtering>
+    				</resource>
+    			</webResources>
     		</configuration>
     	</plugin>
     	
@@ -212,7 +242,7 @@
 	                <username>admin</username>
 	                <password>password</password>
 	            </configuration>
-	        </plugin>
+	        </plugin>     
     </plugins>
   </build>
 </project>

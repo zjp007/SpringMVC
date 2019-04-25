@@ -15,7 +15,7 @@ import dorm.user.domain.pojo.UserBaseOrder;
 @MapperScan
 public interface UserMapper {
 	//根据userId查询
-	UserBaseOrder selectUser (@Param(value="userId") String userId);
+	UserBaseOrder selectByUserId (@Param(value="userId") String userId);
 	
 	//查询所有User
 	List<UserBaseOrder> selectAllUser ();
@@ -29,8 +29,8 @@ public interface UserMapper {
 	//增加User
 	Integer insertUser (UserBaseOrder userBaseOrder);
 	
-	//根据userId或者name模糊查询
-	List<UserBaseOrder> selectUserByUserIdOrName (@Param(value="selectStr")String selectStr);
+	//查询
+	List<UserBaseOrder> selectUsers (@Param(value="selectStr")String selectStr);
 	
 	//登陆判断
 	UserBaseOrder loginUser (@Param(value="userId") String userId, @Param(value="password") String password);

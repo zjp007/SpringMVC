@@ -6,24 +6,24 @@ package dorm.user.domain.pojo;
 */
 public interface UserEnum {
 	
-	//0--系统管理员
-	Integer systemAdmin = 0;
+	//1--系统管理员
+	Integer systemAdmin = 1;
 	
-	//1--宿舍管理员
-	Integer dormAdmin = 1;
+	//2--宿舍管理员
+	Integer dormAdmin = 2;
 	
-	//2--财务管理员
-	Integer costAdmin = 2;
+	//3--财务管理员
+	Integer costAdmin = 3;
 	
-	//3--维修管理员
-	Integer repairAdmin = 3;
+	//4--维修管理员
+	Integer repairAdmin = 4;
 	
-	//4--教师
-	Integer teacher = 4;
+	//5--教师
+	Integer teacher = 5;
 	
-	//5--学生
-	Integer student = 5;
+	//6--学生
+	Integer student = 6;
 	
-	//6--来访者
-	Integer visitor = 6;
+	//7--来访者
+	Integer visitor = 7;
 }

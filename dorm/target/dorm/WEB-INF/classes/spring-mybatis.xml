@@ -10,7 +10,7 @@
                         http://www.springframework.org/schema/mvc  
                         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 	<!-- 自动扫描 -->
-	<context:component-scan base-package="dorm.user.*" />
+	<context:component-scan base-package="dorm.user.*,dorm.room.*,dorm.student.*,dorm.post.*" />
 	<!-- 引入配置文件 -->
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -38,12 +38,20 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<!-- 自动扫描mapping.xml文件 -->
-		<property name="mapperLocations" value="classpath:dorm/user/domain/mapper/*.xml"></property>
+		<!-- <property name="mapperLocations" value="classpath:dorm/user/domain/mapper/*.xml"></property> -->
+		<property name="mapperLocations">
+			<array>
+				<value>classpath:dorm/user/domain/mapper/*.xml</value>
+				<value>classpath:dorm/room/domain/mapper/*.xml</value>
+				<value>classpath:dorm/student/domain/mapper/*.xml</value>
+				<value>classpath:dorm/post/domain/mapper/*.xml</value>
+			</array>
+		</property>
 	</bean>
 
 	<!-- DAO接口所在包名，Spring会自动查找其下的类 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="dorm.user.domain.mapper" />
+		<property name="basePackage" value="dorm.user.domain.mapper,dorm.room.domain.mapper,dorm.student.domain.mapper,dorm.post.domain.mapper" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
 	</bean>
 
@@ -52,5 +60,4 @@
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-
 </beans>

@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService{
 	//根据UserId获取User
 	@Override
 	public UserBaseOrder getUserByUserId(String userId) {
-		return this.userMapper.selectUser(userId);
+		return this.userMapper.selectByUserId(userId);
 	}
 	
 	//获取所有User
@@ -56,9 +56,9 @@ public class UserServiceImpl implements UserService{
 	
 	//根据userId或者name模糊查询
 	@Override
-	public List<UserBaseOrder> selectUserByUserIdOrName(String selectStr) {
+	public List<UserBaseOrder> selectUsers (String selectStr) {
 		
-		return this.userMapper.selectUserByUserIdOrName(selectStr);
+		return this.userMapper.selectUsers(selectStr);
 	}
 	
 	//登陆判断

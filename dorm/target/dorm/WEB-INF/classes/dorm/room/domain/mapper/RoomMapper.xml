@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dorm.room.domain.mapper.RoomMapper">
+	<!-- 返回类型==包含备用字段 -->
+	<resultMap id="ResultALLMap" type="dorm.room.domain.pojo.RoomBaseOrder" >
+    <id column="room_id" property="roomId" jdbcType="VARCHAR" />
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="electric" property="electric" jdbcType="DOUBLE"/>
+    <result column="water" property="water" jdbcType="DOUBLE"/>
+    <result column="size" property="size" jdbcType="INTEGER" />
+    <result column="used" property="used" jdbcType="INTEGER" />
+    <result column="last" property="last" jdbcType="INTEGER" />
+    <result column="academy" property="academy" jdbcType="VARCHAR" />
+    <result column="school" property="school" jdbcType="VARCHAR" />
+    <result column="condition" property="condition" jdbcType="DOUBLE"/>
+    <result column="attendance" property="attendance" jdbcType="DOUBLE"/>
+    <result column="assets" property="assets" jdbcType="TINYINT"/>
+    <result column="build" property="build" jdbcType="VARCHAR" />
+    <result column="floor" property="floor" jdbcType="VARCHAR" />
+    <result column="spare01" property="spare01" jdbcType="VARCHAR" />
+    <result column="spare02" property="spare02" jdbcType="VARCHAR" />
+    <result column="spare03" property="spare03" jdbcType="VARCHAR" />
+    <result column="spare04" property="spare04" jdbcType="VARCHAR" />
+    <result column="spare05" property="spare05" jdbcType="VARCHAR" />
+    <result column="spare06" property="spare06" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <parameterMap type="dorm.room.domain.pojo.RoomBaseOrder" id="ParameAllMap">
+  	<parameter property="id" jdbcType="VARCHAR"/>
+  	<parameter property="roomId" jdbcType="VARCHAR"/>
+  	<parameter property="name" jdbcType="VARCHAR" />
+    <parameter property="electric" jdbcType="DOUBLE"/>
+    <parameter property="water" jdbcType="DOUBLE"/>
+    <parameter property="size" jdbcType="INTEGER" />
+    <parameter property="used" jdbcType="INTEGER" />
+    <parameter property="last" jdbcType="INTEGER" />
+    <parameter property="academy" jdbcType="VARCHAR" />
+    <parameter property="school" jdbcType="VARCHAR" />
+    <parameter property="condition" jdbcType="DOUBLE"/>
+    <parameter property="attendance" jdbcType="DOUBLE"/>
+    <parameter property="assets" jdbcType="TINYINT"/>
+    <parameter property="build" jdbcType="VARCHAR" />
+    <parameter property="floor" jdbcType="VARCHAR" />
+    <parameter property="spare01" jdbcType="VARCHAR" />
+    <parameter property="spare02" jdbcType="VARCHAR" />
+    <parameter property="spare03" jdbcType="VARCHAR" />
+    <parameter property="spare04" jdbcType="VARCHAR" />
+    <parameter property="spare05" jdbcType="VARCHAR" />
+    <parameter property="spare06" jdbcType="VARCHAR" />
+  </parameterMap>
+  
+  <sql id="AllList" >
+    id, room_id, name, electric, water, size, used, last, academy, school, condition
+    ,attendance, assets, build, floor, spare01, spare02, spare03, spare04, spare05, spare06
+  </sql>
+  
+  <select id="selectALLRooms" resultMap="ResultALLMap">
+  	select *
+  	from room
+  </select>
+  
+  <select id="selectRoomsWithSearch" resultMap="ResultALLMap">
+  	select *
+  	from room
+  	where room_id is not null
+  	<if test="roomIdOrName != null and roomIdOrName != ''">
+  	AND room_id like CONCAT('%',#{roomIdOrName,jdbcType=VARCHAR},'%') OR name like CONCAT('%',#{roomIdOrName,jdbcType=VARCHAR},'%')
+  	</if>
+  	<if test="academy !=null and academy != ''">
+  	AND academy like CONCAT('%',#{academy,jdbcType=VARCHAR},'%')
+  	</if>
+  	<if test="build !=null and build != ''">
+  	AND build like CONCAT('%',#{build,jdbcType=VARCHAR},'%')
+  	</if>
+  	<if test="school !=null and school != ''">
+  	AND school like CONCAT('%',#{school,jdbcType=VARCHAR},'%')
+  	</if>
+  	<if test="floor !=null and floor != ''">
+  	AND floor like CONCAT('%',#{floor,jdbcType=VARCHAR},'%')
+  	</if>
+  </select>
+  
+  <update id="updateRoom" parameterType="dorm.room.domain.pojo.RoomBaseOrder">
+  update room
+  	<set>
+  		<if test="id != null and id != ''">
+  			id = #{id,jdbcType=VARCHAR},
+  		</if>
+  		<if test="roomId != null and roomId != ''">
+  			room_id = #{roomId,jdbcType=VARCHAR},
+  		</if>
+  		<if test="name != null and name != ''">
+  			name = #{name,jdbcType=VARCHAR},
+  		</if>
+  		<if test="electric != null and electric != ''">
+  			electric = #{electric,jdbcType=DOUBLE},
+  		</if>
+  		<if test="water != null and water != ''">
+  			water = #{water,jdbcType=DOUBLE},
+  		</if>
+  		<if test="size != null and size != ''">
+        	size = #{size,jdbcType=INTEGER},
+        </if>
+        <if test="used != null and used != ''">
+        	used = #{used,jdbcType=INTEGER},
+        </if>
+        <if test="last != null and last != ''">
+        	last = #{last,jdbcType=INTEGER},
+        </if>
+        <if test="academy != null and academy != ''">
+  			academy = #{academy,jdbcType=VARCHAR},
+  		</if>
+  		<if test="school != null and school != ''">
+  			school = #{school,jdbcType=VARCHAR},
+  		</if>
+  		<if test="condition != null and condition != ''">
+  			condition = #{condition,jdbcType=DOUBLE},
+  		</if>
+  		<if test="attendance != null and attendance != ''">
+  			attendance = #{attendance,jdbcType=DOUBLE},
+  		</if>
+  		<if test="assets != null and assets != ''">
+  			assets = #{assets,jdbcType=TINYINT},
+  		</if>
+  		<if test="build != null and build != ''">
+  			build = #{build,jdbcType=VARCHAR},
+  		</if>
+  		<if test="floor != null and floor != ''">
+  			floor = #{floor,jdbcType=VARCHAR},
+  		</if>
+        <if test="spare01 != null and spare01 != ''">
+        	spare01 = #{spare01,jdbcType=VARCHAR},
+        </if>
+        <if test="spare02 != null and spare02 != ''">
+        	spare02 = #{spare02,jdbcType=VARCHAR},
+        </if>
+        <if test="spare03 != null and spare03 != ''">
+        	spare03 = #{spare03,jdbcType=VARCHAR},
+        </if>
+        <if test="spare04 != null and spare04 != ''">
+        	spare04 = #{spare04,jdbcType=VARCHAR},
+        </if>
+        <if test="spare05 != null and spare05 != ''">
+        	spare05 = #{spare05,jdbcType=VARCHAR},
+        </if>
+        <if test="spare06 != null and spare06 != ''">
+        	spare06 = #{spare06,jdbcType=VARCHAR},
+        </if>
+        where room_id = #{roomId}
+  	</set>
+  </update>
+  
+  <insert id="insertRoom" parameterType="dorm.room.domain.pojo.RoomBaseOrder">
+  insert into room
+  	<trim prefix="(" suffix=")" suffixOverrides=",">
+  		<include refid="AllList" />
+  	</trim>
+  	<trim prefix="values (" suffix=")" suffixOverrides="," >
+  		#{id,jdbcType=VARCHAR},#{roomId,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},#{electric,jdbcType=DOUBLE},#{water,jdbcType=DOUBLE},
+  		#{size,jdbcType=INTEGER},#{used,jdbcType=INTEGER},#{last,jdbcType=INTEGER},#{academy,jdbcType=VARCHAR},#{school,jdbcType=VARCHAR},
+		#{condition,jdbcType=DOUBLE},#{attendance,jdbcType=DOUBLE},#{assets,jdbcType=TINYINT},#{build,jdbcType=VARCHAR},#{floor,jdbcType=VARCHAR},
+		#{spare01,jdbcType=VARCHAR},#{spare02,jdbcType=VARCHAR},#{spare03,jdbcType=VARCHAR},#{spare04,jdbcType=VARCHAR},#{spare05,jdbcType=VARCHAR},#{spare06,jdbcType=VARCHAR},
+  	</trim>
+  </insert>
+  
+  <delete id="deleteRoom" parameterType="java.lang.String">
+  	delete from room
+  	where room_id = #{roomId,jdbcType=VARCHAR}
+  </delete>
+  
+</mapper>

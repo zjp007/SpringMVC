@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dorm.post.domain.mapper.PostMapper">
+	<resultMap type="dorm.post.domain.pojo.PostBaseOrder" id="Resultmap">
+		<id column="post_id" property="postId" jdbcType="VARCHAR" />
+		<result column="id" property="id" jdbcType="VARCHAR" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="content" property="content" jdbcType="VARCHAR" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="create_id" property="createId" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="VARCHAR" />
+		<result column="release_id" property="releaseId" jdbcType="VARCHAR" />
+		<result column="release_time" property="releaseTime" jdbcType="VARCHAR" />
+		<result column="start_time" property="startTime" jdbcType="VARCHAR" />
+		<result column="end_time" property="endTime" jdbcType="VARCHAR" />
+		<result column="del_mark" property="delMark" jdbcType="INTEGER" />
+		<result column="type" property="type" jdbcType="INTEGER" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="BaseList">
+		id, post_id, title, content, remark, create_id, create_time, release_id, release_time
+		, start_time, end_time, del_mark, type, status
+	</sql>
+	
+	<select id="selectPostsWithSearch" resultMap="Resultmap" parameterType="Map">
+		select *
+		from room_post
+		<if test="delMark != null and delMark != ''">
+			where del_mark = #{delMark,jdbcType=INTEGER}
+		</if>
+		<if test="delMark == null or delMark == ''">
+			where del_mark = 0
+		</if>
+		<if test="postId != null and postId != ''">
+			AND post_id = #{postId,jdbcType=VARCHAR}
+		</if>
+		<if test="title != null and title != ''">
+			AND title = #{title,jdbcType=VARCHAR}
+		</if>
+		<if test="createId != null and createId != ''">
+			AND create_id = #{createId,jdbcType=VARCHAR}
+		</if>
+		<if test="createTime != null and createTime != ''">
+			AND create_time = #{createTime,jdbcType=VARCHAR}
+		</if>
+		<if test="releaseId != null and releaseId != ''">
+			AND release_id = #{releaseId,jdbcType=VARCHAR}
+		</if>
+		<if test="releaseTime != null and releaseTime != ''">
+			AND release_time = #{releaseTime,jdbcType=VARCHAR}
+		</if>
+		<if test="startTime != null and startTime != ''">
+			AND start_time = #{startTime,jdbcType=VARCHAR}
+		</if>
+		<if test="endTime != null and endTime != ''">
+			AND end_time = #{endTime,jdbcType=VARCHAR}
+		</if>
+		<if test="type != null and type != ''">
+			AND type = #{type,jdbcType=INTEGER}
+		</if>
+		<if test="status != null and status != ''">
+			AND status = #{status,jdbcType=INTEGER}
+		</if>
+	</select>
+	
+	<insert id="insertPost" parameterType="dorm.post.domain.pojo.PostBaseOrder">
+		insert into room_post
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+  		<include refid="BaseList" />
+  	</trim>
+  	<trim prefix="values (" suffix=")" suffixOverrides="," >
+  		<if test="id != null and id != ''" >
+  			#{id,jdbcType=VARCHAR},
+        </if>
+        #{postId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},#{content,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
+        ,#{createId,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR},#{releaseId,jdbcType=VARCHAR},#{releaseTime,jdbcType=VARCHAR}
+        ,#{startTime,jdbcType=VARCHAR}, #{endTime,jdbcType=VARCHAR},#{delMark,jdbcType=INTEGER},#{type,jdbcType=INTEGER},#{status,jdbcType=INTEGER}
+  	</trim>
+	</insert>
+	
+	<update id="updatePost" parameterType="dorm.post.domain.pojo.PostBaseOrder">
+		update room_post
+		<set>
+			<if test="id != null and id != ''">
+				id = #{id,jdbcType=VARCHAR},
+			</if>
+			<if test="title != null and title != ''">
+				title = #{title,jdbcType=VARCHAR},
+			</if>
+			<if test="content != null and content != ''">
+				content = #{content,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null and remark != ''">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createId != null and createId != ''">
+				create_id = #{createId,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null and createTime != ''">
+				create_time = #{createTime,jdbcType=VARCHAR},
+			</if>
+			<if test="releaseId != null and releaseId != ''">
+				release_id = #{releaseId,jdbcType=VARCHAR},
+			</if>
+			<if test="releaseTime != null and releaseTime != ''">
+				release_time = #{releaseTime,jdbcType=VARCHAR},
+			</if>
+			<if test="startTime != null and startTime != ''">
+				start_time = #{startTime,jdbcType=VARCHAR},
+			</if>
+			<if test="endTime != null and endTime != ''">
+				end_time = #{endTime,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null and type != ''">
+				type = #{type,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null and status != ''">
+				status = #{status,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where post_id = #{postId,jdbcType=VARCHAR}
+	</update>
+	
+	<delete id="deletePost" parameterType="java.lang.String">
+		delete
+		from room_post
+		where post_id = #{postId,jdbcType=VARCHAR}
+	</delete>
+</mapper>

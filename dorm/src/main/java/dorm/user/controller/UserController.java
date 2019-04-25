@@ -1,5 +1,7 @@
 package dorm.user.controller;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 //import javax.json.JsonString;
@@ -21,7 +23,7 @@ public interface UserController {
 	String getUserByUserId (HttpServletRequest request, HttpServletResponse response);
 	
 	//获取所有User
-	String getAllUsers (HttpServletRequest request, HttpServletResponse response);
+	String getAllUsers (HttpServletRequest request, HttpServletResponse response) throws IOException;
 		
 	//更新User
 	String updateUser (HttpServletRequest request, HttpServletResponse response);
@@ -32,8 +34,8 @@ public interface UserController {
 	//删除User
 	String deleteUser (HttpServletRequest request, HttpServletResponse response);
 	
-	//根据userId或者name模糊查询
-	String selectUserByUserIdOrName (HttpServletRequest request, HttpServletResponse response);
+	//查询
+	String selectUsers (HttpServletRequest request, HttpServletResponse response);
 	
 	//登陆判断
 	String loginUser (HttpServletRequest request, HttpServletResponse response);

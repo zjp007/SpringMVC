@@ -50,7 +50,7 @@
     id, user_id, name, password, operate, spare01, spare02, spare03, spare04
   </sql>
   
-  <select id="selectUser" resultMap="ResultALLMap" parameterType="java.lang.String">
+  <select id="selectByUserId" resultMap="ResultALLMap" parameterType="java.lang.String">
   	select
   	<include refid="AllList" />
   	from user
@@ -79,16 +79,16 @@
   			operate = #{operate,jdbcType=INTEGER},
   		</if>
   		<if test="spare01 != null and spare01 != ''">
-        	#{spare01,jdbcType=VARCHAR},
+        	spare01 = #{spare01,jdbcType=VARCHAR},
         </if>
         <if test="spare02 != null and spare02 != ''">
-        	#{spare02,jdbcType=VARCHAR},
+        	spare02 = #{spare02,jdbcType=VARCHAR},
         </if>
         <if test="spare03 != null and spare03 != ''">
-        	#{spare03,jdbcType=VARCHAR},
+        	spare03 = #{spare03,jdbcType=VARCHAR},
         </if>
         <if test="spare04 != null and spare04 != ''">
-        	#{spare04,jdbcType=VARCHAR},
+        	spare04 = #{spare04,jdbcType=VARCHAR},
         </if>
   	</set>
   	where user_id = #{userId}
@@ -115,11 +115,13 @@
   	</trim>
   </insert>
   
-  <select id="selectUserByUserIdOrName" resultMap="ResultALLMap" parameterType="java.lang.String">
+  <select id="selectUsers" resultMap="ResultALLMap" parameterType="java.lang.String">
   	select
   	<include refid="AllList" />
   	from user
-  	where user_id like CONCAT('%',#{selectStr},'%') OR name like CONCAT('%',#{selectStr},'%')
+  	<if test="selectStr != null and selectStr != ''">
+  		where user_id like CONCAT('%',#{selectStr,jdbcType=VARCHAR},'%') OR name like CONCAT('%',#{selectStr,jdbcType=VARCHAR},'%')
+  	</if>
   </select>
   
   <select id="loginUser" resultMap="ResultALLMap" parameterType="java.lang.String">

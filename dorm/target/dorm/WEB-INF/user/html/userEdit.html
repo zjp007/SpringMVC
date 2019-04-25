@@ -1,0 +1,85 @@
+
+<html>
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width" />
+    <title>添加用户</title>
+
+    <script src="../../lib/js/jquery-3.3.0.js"></script>
+
+    <script src="../../lib/js/bootstrap-table.js"></script>
+    <link href="../../lib/css/bootstrap.css" rel="stylesheet" />
+
+    <script src="../../lib/js/bootstrap-table.js"></script>
+    <link href="../../lib/css/bootstrap-table.css" rel="stylesheet" />
+    <script src="../../lib/js/bootstrap-table-zh-CN.js"></script>
+
+    <script src="../../lib/layer/layer.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../lib/layer/theme/default/layer.css">
+
+    <link href="../../lib/css/dorm.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="panel-body" style="padding-bottom:0px;">
+        <div class="panel panel-default table-responsive">
+            <div class="panel-heading height_56">
+                    <button id="btn_back" type="button" class="btn btn-default btn_right pull-right"  onclick="button_back ()">
+                        <span aria-hidden="true">返回</span>
+                    </button>
+                    <span class="txt_center">提交</span>
+                    <button type="submit" class="btn btn-default pull-right txt_center" onclick="updateUserButtonSubmit ()">提交</button>
+            </div>
+            <from class="form-horizontal" role="form">
+
+                <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <td><label class="control-label col-sm-12 txt_center" >序号：</label></td>
+                            <td><input type="text" class="form-control col-sm-4 half_width" id="txt_id"></td>
+                            <td><label class="control-label col-sm-12 txt_center" >用户账号：</label></td>
+                            <td><input type="text" class="form-control col-sm-4 half_width" id="txt_userId"></td>
+                        </tr>
+                        <tr>
+                            <td><label class="control-label col-sm-12 txt_center" >姓名：</label></td>
+                            <td><input type="text" class="form-control col-sm-12 half_width" id="txt_name"></td>
+                            <td><label class="control-label col-sm-12 txt_center" >密码：</label></td>
+                            <td><input type="text" class="form-control col-sm-12 half_width" id="txt_password"></td>
+                        </tr>
+                        <tr>
+                            <td><label class="control-label col-sm-12 txt_center" >权限选择：</label></td>
+                            <td><select id="opreate_select_operate" class="form-control mglf3 half_width" title="请选择：">
+                                    <option value="1">系统管理员</option>
+                                    <option value="2">宿舍管理员</option>
+                                    <option value="3">财务管理员</option>
+                                    <option value="4">维修管理员</option>
+                                    <option value="5">教师</option>
+                                    <option value="6">学生</option>
+                                    <option value="7">访客</option>
+                            </select></td>
+                            <td><label class="control-label col-sm-12 txt_center" >确认密码：</label></td>
+                            <td><input type="password" class="form-control col-sm-12 half_width" id="txt_password_again"></td>
+                        </tr>
+                        <!-- <tr>
+                            <td><label class="control-label col-sm-12 txt_center" >备用字段01：</label></td>
+                            <td><input type="text" class="form-control col-sm-12" id="txt_spare01"></td>
+                            <td><label class="control-label col-sm-12 txt_center" >备用字段02：</label></td>
+                            <td><input type="text" class="form-control col-sm-12" id="txt_spare02"></td>
+                        </tr>
+                        <tr>
+                            <td><label class="control-label col-sm-12 txt_center" >备用字段03：</label></td>
+                            <td><input type="text" class="form-control col-sm-12" id="txt_spare03"></td>
+                            <td><label class="control-label col-sm-12 txt_center" >备用字段04：</label></td>
+                            <td><input type="text" class="form-control col-sm-12" id="txt_spare04"></td>
+                        </tr> -->
+                    </tbody>
+            </table>
+
+            </from>
+        </div>
+    </div>
+
+
+    <script src="../userJs/userEditJs.js"></script>
+
+</body>
+</html>

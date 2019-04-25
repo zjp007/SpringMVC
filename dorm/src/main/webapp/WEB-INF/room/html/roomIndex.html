@@ -1,0 +1,157 @@
+
+<html>
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width" />
+    <title>宿舍列表</title>
+
+    <script src="../../lib/js/jquery-3.3.0.js"></script>
+
+    <script src="../../lib/js/bootstrap-table.js"></script>
+    <link href="../../lib/css/bootstrap.css" rel="stylesheet" />
+
+    <script src="../../lib/js/bootstrap-table.js"></script>
+    <link href="../../lib/css/bootstrap-table.css" rel="stylesheet" />
+    <script src="../../lib/js/bootstrap-table-zh-CN.js"></script>
+
+    <!-- <link rel="stylesheet" type="text/css" href="../../lib/css/dorm.css"> -->
+    <link rel="stylesheet" type="text/fonts" href="../../lib/fonts/*">
+
+</head>
+<body>
+    <div class="panel-body" style="padding-bottom:0px;">
+        <div class="panel panel-default">
+            <div class="panel-heading">查询条件</div>
+            <div class="panel-body">
+                <form id="formSearch" class="form-horizontal">
+                    <div class="form-group" style="margin-top:15px">
+
+                        <div style="height: 50px;">
+                        <label class="control-label col-sm-1" for="txt_search_nameOrUserId">宿舍：</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="txt_search_RoomIdOrName" placeholder="宿舍号或宿舍名">
+                        </div>
+                        <div class="col-sm-1" style="text-align:left;">
+                            <button type="button" style="" id="btn_query_RoomIdOrName" class="btn btn-primary">查询</button>
+                        </div>
+
+                        <label class="control-label col-sm-1" for="txt_search_academy">学院：</label>
+                        <div class="col-sm-2">
+                            <!-- <input type="text" class="form-control" id="txt_search_nameOrUserId"> -->
+                            <select id="opreate_select_academy" class="form-control mglf3 half_width">
+                                    <option value=""> </option>
+                                    <option value="计算机与信息工程学院">计算机与信息工程学院</option>
+                                    <option value="文学院">文学院</option>
+                                    <option value="新闻传播学院">新闻传播学院</option>
+                                    <option value="商学院">商学院</option>
+                                    <option value="政法与公共管理学院">政法与公共管理学院</option>
+                                    <option value="外国语学院">外国语学院</option>
+                                    <option value="历史文化学院">历史文化学院</option>
+                                    <option value="教育学院">教育学院</option>
+                                    <option value="哲学学院">哲学学院</option>
+                                    <option value="马克思主义学院">马克思主义学院</option>
+                                    <option value="数学与统计学学院">数学与统计学学院</option>
+                                    <option value="物理与电子科学学院">物理与电子科学学院</option>
+                                    <option value="化学化工学院">化学化工学院</option>
+                                    <option value="生命科学学院">生命科学学院</option>
+                                    <option value="资源环境学院">资源环境学院</option>
+                                    <!-- <option value="计算机与信息工程学院">计算机与信息工程学院</option> -->
+                                    <option value="材料科学与工程学院">材料科学与工程学院</option>
+                                    <option value="艺术学院">艺术学院</option>
+                                    <option value="体育学院">体育学院</option>
+                                    <option value="通识教育学院">通识教育学院</option>
+                                    <option value="楚才学院">楚才学院</option>
+                                    <option value="国际教育学院">国际教育学院</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-1" style="text-align:left;">
+                            <button type="button" style="" id="btn_query_academy" class="btn btn-primary">查询</button>
+                        </div>
+                        <label class="control-label col-sm-1" for="txt_search_build">楼栋：</label>
+                        <div class="col-sm-2">
+                            <!-- <input type="text" class="form-control" id="txt_search_nameOrUserId"> -->
+                            <select id="opreate_select_build" class="form-control mglf3 half_width">
+                                    <option value=""> </option>
+                                    <option value="一期A栋">一期A栋</option>
+                                    <option value="一期B栋">一期B栋</option>
+                                    <option value="一期C栋">一期C栋</option>
+                                    <option value="一期D栋">一期D栋</option>
+                                    <option value="一期E栋">一期E栋</option>
+                                    <option value="二期A栋">二期A栋</option>
+                                    <option value="二期B栋">二期B栋</option>
+                                    <option value="二期C栋">二期C栋</option>
+                                    <option value="二期D栋">二期D栋</option>
+                                    <option value="二期E栋">二期E栋</option>
+                                    <option value="二期F栋">二期F栋</option>
+                                    <option value="三期A栋">三期A栋</option>
+                                    <option value="三期B栋">三期B栋</option>
+                                    <option value="三期C栋">三期C栋</option>
+                                    <option value="三期D栋">三期D栋</option>
+                                    <option value="三期E栋">三期E栋</option>
+                                    <option value="三期F栋">三期F栋</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-1" style="text-align:left;">
+                            <button type="button" style="" id="btn_query_build" class="btn btn-primary">查询</button>
+                        </div>
+                        </div>
+
+                        <div style="height: 50px;">
+
+                        <label class="control-label col-sm-1" for="txt_search_school">专业：</label>
+                        <div class="col-sm-2">
+                            <!-- <input type="text" class="form-control" id="txt_search_nameOrUserId"> -->
+                            <select id="opreate_select_school" class="form-control mglf3 half_width">
+                                    <option value=""> </option>
+                                    <option value="软件工程">软件工程</option>
+                                    <option value="计算机科学与技术">计算机科学与技术</option>
+                                    <option value="信息安全">信息安全</option>
+                                    <!-- <option value="四层">四层</option>
+                                    <option value="五层">五层</option>
+                                    <option value="六层">六层</option>
+                                    <option value="七层">七层</option> -->
+                            </select>
+                        </div>
+                        <div class="col-sm-1" style="text-align:left;">
+                            <button type="button" style="" id="btn_query_school" class="btn btn-primary">查询</button>
+                        </div>
+
+                        <label class="control-label col-sm-1" for="txt_search_floor">楼层：</label>
+                        <div class="col-sm-2">
+                            <!-- <input type="text" class="form-control" id="txt_search_nameOrUserId"> -->
+                            <select id="opreate_select_floor" class="form-control mglf3 half_width">
+                                    <option value=""> </option>
+                                    <option value="1层">1层</option>
+                                    <option value="2层">2层</option>
+                                    <option value="3层">3层</option>
+                                    <option value="4层">4层</option>
+                                    <option value="5层">5层</option>
+                                    <option value="6层">6层</option>
+                                    <option value="7层">7层</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-1" style="text-align:left;">
+                            <button type="button" style="" id="btn_query_floor" class="btn btn-primary">查询</button>
+                        </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="toolbar" class="btn-group">
+            <button id="btn_add" type="button" class="btn btn-default">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+            </button>
+            <button id="btn_edit" type="button" class="btn btn-default">
+                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
+            </button>
+            <button id="btn_delete" type="button" class="btn btn-default">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+            </button>
+        </div>
+        <table id="tb_rooms"></table>
+
+    </div>
+<script src="../roomJs/roomIdex.js"></script>
+</body>
+</html>

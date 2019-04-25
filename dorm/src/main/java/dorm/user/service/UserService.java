@@ -25,8 +25,8 @@ public interface UserService {
 	//删除User
 	boolean deleteUser (String userId);
 	
-	//根据userId或者name模糊查询
-	List<UserBaseOrder> selectUserByUserIdOrName (String selectStr);
+	//查询
+	List<UserBaseOrder> selectUsers (String selectStr);
 	
 	//登陆判断
 	UserBaseOrder loginUser (String userId, String password);

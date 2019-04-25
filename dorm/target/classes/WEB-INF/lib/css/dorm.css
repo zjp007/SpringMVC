@@ -1,0 +1,28 @@
+/*
+* @Author: name
+* @Date:   2019-04-12 21:06:35
+* @Last Modified by:   name
+* @Last Modified time: 2019-04-17 16:28:56
+*/
+.txt_center{
+    text-align: center;
+}
+.txt_margin_bottom{
+    margin-bottom:20px;
+}
+.txt_margin_top{
+    margin-top:20px;
+}
+.btn_right{
+    float: right;
+    text-align: center;
+}
+.half_width{
+    width:50%;
+}
+.height_56{
+    height: 56px;
+}
+.height_40{
+    height:50px;
+}

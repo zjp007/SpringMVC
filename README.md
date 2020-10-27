@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #  SpringMVC 项目
 
 主要理解SpringMVC的流程，重点是DispatchServlet的工作流程
@@ -34,3 +35,10 @@
 
     
 
+=======
+# Spring
+Just simple Spring demos
+MYSQL
+Myeclipse
+jdk1.7
+>>>>>>> 71c03f24235bb5dc76f46130174f33fe831fa575

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjp.dao.UserDao">
+
+    <resultMap id="user" type="com.zjp.pojo.User">
+        <id property="id" column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+        <result property="name" column="name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result property="pwd" column="pwd" javaType="java.lang.String" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="baseCloum">id,name,pwd</sql>
+
+    <select id="getAllUser" resultMap="user">
+        SELECT <include refid="baseCloum"/>
+        FROM spring_test.user
+    </select>
+
+</mapper>

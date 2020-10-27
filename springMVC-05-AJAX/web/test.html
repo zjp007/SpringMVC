@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+    <title>AJAX测试</title>
+
+    <script>
+        $(function () {
+            
+        });
+        function goIfram() {
+            var url = $("#url").val();
+            if(url != null && url != ''){
+                $("#iframe1").prop("src", url);
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <div>
+        <div>
+            <input type="text" id="url" class="form-controller" value="">
+            <button id="btn1" onclick="goIfram()">跳转</button>
+        </div>
+        <div>
+            <a id="a1" href="/hello">hello</a>
+        </div>
+
+        <iframe id="iframe1" style="width: 80%;height: 60%;"></iframe>
+    </div>
+
+
+</body>
+</html>

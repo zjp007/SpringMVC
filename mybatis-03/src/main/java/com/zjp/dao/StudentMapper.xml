@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjp.dao.StudentMapper">
+
+    <resultMap id="studentTeacher" type="com.zjp.pojo.Student">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <!-- 复杂的属性，外吗需要单独处理     对象： association 集合：collection-->
+        <association property="teacher" column="tid" javaType="com.zjp.pojo.Teacher" select="getTeacher"/>
+    </resultMap>
+
+    <select id="getAllStudents" resultMap="studentTeacher">
+        SELECT * from spring_test.student
+    </select>
+
+    <select id="getTeacher" resultType="com.zjp.pojo.Teacher">
+        SELECT * from spring_test.teacher where id = #{id}
+    </select>
+
+
+    <resultMap id="studentTeacher2" type="com.zjp.pojo.Student">
+        <id property="id" column="sid"/>
+        <result property="name" column="sname"/>
+        <association property="teacher" javaType="com.zjp.pojo.Teacher">
+            <id property="id" column="tid"/>
+            <result property="name" column="tname"/>
+        </association>
+    </resultMap>
+
+    <!-- 按照结果嵌套处理 -->
+    <select id="getAllStudents2" resultMap="studentTeacher2">
+        SELECT s.id sid,s.name sname,t.id tid,t.name tname from spring_test.student s,spring_test.teacher t
+        WHERE s.tid = t.id
+    </select>
+
+</mapper>

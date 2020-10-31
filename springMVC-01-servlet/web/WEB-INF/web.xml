@@ -14,9 +14,9 @@
     </servlet-mapping>
 
     <!--session配置-->
-    <!--<session-config>-->
+    <!--<session-com.zjp.config>-->
         <!--<session-timeout>15</session-timeout>-->
-    <!--</session-config>-->
+    <!--</session-com.zjp.config>-->
 
     <!--欢迎页面-->
     <!--<welcome-file-list>-->

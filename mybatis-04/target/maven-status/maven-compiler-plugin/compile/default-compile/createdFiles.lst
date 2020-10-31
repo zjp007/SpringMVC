@@ -1,0 +1,5 @@
+com\zjp\config\MybatisConfig.class
+com\zjp\pojo\Student.class
+com\zjp\pojo\Teacher.class
+com\zjp\dao\StudentMapper.class
+com\zjp\dao\TeacherMapper.class

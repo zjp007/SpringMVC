@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjp.dao.TeacherMapper">
+
+    <resultMap id="teacherStudent" type="com.zjp.pojo.Teacher">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <collection property="students" ofType="Student" column="id" javaType="ArrayList" select="getStudents"/>
+    </resultMap>
+
+    <select id="getTeacherById" resultMap="teacherStudent">
+        SELECT * FROM spring_test.teacher WHERE id = #{id};
+    </select>
+
+    <select id="getStudents" resultType="Student">
+        SELECT * FROM spring_test.student WHERE tid = #{tid}
+    </select>
+
+
+
+    <select id="getTeacherById2" resultMap="teacherStudent2">
+        SELECT s.id sid,s.name sname,t.name tname,t.id tid
+        FROM spring_test.student s,spring_test.teacher t
+        WHERE s.tid = t.id AND t.id = #{id}
+    </select>
+
+    <resultMap id="teacherStudent2" type="com.zjp.pojo.Teacher">
+        <id property="id" column="tid"/>
+        <result property="name" column="tname"/>
+        <collection property="students" javaType="ArrayList" ofType="com.zjp.pojo.Student">
+            <id property="id" column="sid"/>
+            <result property="name" column="sname"/>
+            <result property="tid" column="tid"/>
+        </collection>
+    </resultMap>
+
+
+</mapper>

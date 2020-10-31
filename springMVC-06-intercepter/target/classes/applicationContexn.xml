@@ -27,7 +27,7 @@
         <mvc:interceptor>
             <!-- 包括这个请求下面所有的请求 -->
             <mvc:mapping path="/**"/>
-            <bean class="com.zjp.config.MyInterceptor"/>
+            <bean class="com.zjp.com.zjp.config.MyInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 

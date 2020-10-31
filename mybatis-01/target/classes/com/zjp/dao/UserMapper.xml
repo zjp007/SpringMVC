@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zjp.dao.UserDao">
+<mapper namespace="com.zjp.com.zjp.dao.UserMapper">
 
-    <resultMap id="user" type="com.zjp.pojo.User">
+    <resultMap id="user" type="com.zjp.com.zjp.pojo.User">
         <id property="id" column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
         <result property="name" column="name" javaType="java.lang.String" jdbcType="VARCHAR"/>
         <result property="pwd" column="pwd" javaType="java.lang.String" jdbcType="VARCHAR"/>
@@ -12,9 +12,28 @@
 
     <sql id="baseCloum">id,name,pwd</sql>
 
+    <!-- 查询所有用户 -->
+
     <select id="getAllUser" resultMap="user">
         SELECT <include refid="baseCloum"/>
         FROM spring_test.user
     </select>
+
+
+    <!-- 新增用户 -->
+    <insert id="add" parameterType="com.zjp.com.zjp.pojo.User" keyProperty="id">
+        INSERT INTO spring_test.user (<include refid="baseCloum"/>) VALUES (#{id},#{name},#{pwd})
+    </insert>
+
+    <update id="update" parameterType="com.zjp.com.zjp.pojo.User">
+        UPDATE spring_test.user SET
+        <if test="name != null and name != ''"> id = #{name}, </if>
+        <if test="pwd != null and pwd != ''"> pwd = #{pwd} </if>
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        DELETE FROM spring_test.user WHERE id = #{id}
+    </delete>
 
 </mapper>

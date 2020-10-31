@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!-- 引入外部配置文件 -->
+    <properties resource="db.properties">
+        <property name="user" value="root"/>
+    </properties>
+    
+    <!-- 实体类起别名 -->
+    <typeAliases>
+        <!--<typeAlias type="com.zjp.com.zjp.pojo.User" alias="User"/>-->
+        <package name="com.zjp.pojo"/>
+    </typeAliases>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${userName}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <!--<mapper class="com.zjp.dao.TeacherMapper"/>-->
+        <package name="com.zjp.dao"/>
+    </mappers>
+
+</configuration>
